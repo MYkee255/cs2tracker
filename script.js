@@ -9,7 +9,7 @@ const maps = [
     "Nuke"
 ];
 
-// --- LENYÍLÓ MENÜ FELTÖLTÉSE ---
+// --- MAP SELECT FELTÖLTÉSE ---
 const mapSelect = document.getElementById("mapSelect");
 maps.forEach(map => {
     const option = document.createElement("option");
@@ -27,10 +27,10 @@ document.getElementById("saveBtn").addEventListener("click", () => {
     const selectedMap = document.getElementById("mapSelect").value;
 
     const matchData = {
-        result: result,
-        kills: kills,
-        deaths: deaths,
-        assists: assists,
+        result,
+        kills,
+        deaths,
+        assists,
         map: selectedMap,
         date: new Date().toISOString()
     };
@@ -42,28 +42,32 @@ document.getElementById("saveBtn").addEventListener("click", () => {
     loadMatches();
 });
 
-// --- MECCSEK BETÖLTÉSE ---
+// --- MECCSEK LISTÁZÁSA ---
 function loadMatches() {
-    const container = document.getElementById("matchList");
-    container.innerHTML = "";
+    const list = document.getElementById("matchList");
+    list.innerHTML = "";
 
     let matches = JSON.parse(localStorage.getItem("matches")) || [];
 
     matches.forEach(match => {
-        const div = document.createElement("div");
-        div.className = "matchItem";
+        const li = document.createElement("li");
 
-        div.innerHTML = `
+        // Színkódolás
+        if (match.result === "win") li.classList.add("match-good");
+        if (match.result === "draw") li.classList.add("match-medium");
+        if (match.result === "lose") li.classList.add("match-bad");
+
+        li.innerHTML = `
             <strong>${match.result.toUpperCase()}</strong>
-            - Map: ${match.map}
-            - K/D/A: ${match.kills}/${match.deaths}/${match.assists}
+            | Map: ${match.map}
+            | K/D/A: ${match.kills}/${match.deaths}/${match.assists}
             <br>
             <small>${new Date(match.date).toLocaleString()}</small>
         `;
 
-        container.appendChild(div);
+        list.appendChild(li);
     });
 }
 
-// --- OLDAL BETÖLTÉSEKOR ---
+// --- OLDAL BETÖLTÉSE ---
 loadMatches();
