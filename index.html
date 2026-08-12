@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <title>CS2 Meccs Rögzítő</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<section class="section" id="cs2">
+  <h2>CS2 Meccs Rögzítő</h2>
+
+  <label>Eredmény:</label>
+  <select id="result">
+    <option value="win">Win</option>
+    <option value="lose">Lose</option>
+    <option value="draw">Draw</option>
+  </select>
+
+  <label>Killek:</label>
+  <input type="number" id="kills" placeholder="pl. 23">
+
+  <label>Halálok:</label>
+  <input type="number" id="deaths" placeholder="pl. 14">
+
+  <label>Assistek:</label>
+  <input type="number" id="assists" placeholder="pl. 5">
+
+  <label>Időpont:</label>
+  <input type="text" id="match-time" placeholder="2026.08.12 03:13">
+
+  <button id="save-match">Meccs mentése</button>
+
+  <h3>Rögzített meccsek</h3>
+  <ul id="match-list"></ul>
+</section>
+
+<!-- 🔥 EZ A SOR HIÁNYZOTT -->
+<script src="script.js"></script>
+
+</body>
+</html>
