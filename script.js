@@ -25,6 +25,12 @@ document.getElementById("saveBtn").addEventListener("click", () => {
     const deaths = parseInt(document.getElementById("deathsInput").value) || 0;
     const assists = parseInt(document.getElementById("assistsInput").value) || 0;
     const selectedMap = document.getElementById("mapSelect").value;
+    const dateInput = document.getElementById("dateInput").value;
+
+    if (!dateInput) {
+        alert("Kérlek, add meg a dátumot!");
+        return;
+    }
 
     const matchData = {
         result,
@@ -32,7 +38,7 @@ document.getElementById("saveBtn").addEventListener("click", () => {
         deaths,
         assists,
         map: selectedMap,
-        date: new Date().toISOString()
+        date: dateInput
     };
 
     let matches = JSON.parse(localStorage.getItem("matches")) || [];
@@ -57,13 +63,24 @@ function loadMatches() {
         if (match.result === "draw") li.classList.add("match-medium");
         if (match.result === "lose") li.classList.add("match-bad");
 
+        // Tartalom
         li.innerHTML = `
             <strong>${match.result.toUpperCase()}</strong>
             | Map: ${match.map}
             | K/D/A: ${match.kills}/${match.deaths}/${match.assists}
-            <br>
-            <small>${new Date(match.date).toLocaleString()}</small>
+            <br><br>
+            <small>Dátum: ${match.date}</small>
+            <br><br>
+            <button class="deleteBtn">Törlés</button>
         `;
+
+        // Törlés gomb működése
+        li.querySelector(".deleteBtn").addEventListener("click", () => {
+            let matches = JSON.parse(localStorage.getItem("matches")) || [];
+            matches = matches.filter(m => m.date !== match.date || m.kills !== match.kills);
+            localStorage.setItem("matches", JSON.stringify(matches));
+            loadMatches();
+        });
 
         list.appendChild(li);
     });
