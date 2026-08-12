@@ -1,43 +1,41 @@
 <!DOCTYPE html>
 <html lang="hu">
 <head>
-  <meta charset="UTF-8">
-  <title>CS2 Meccs Rögzítő</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>CS2 Match Tracker</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<section class="section" id="cs2">
-  <h2>CS2 Meccs Rögzítő</h2>
+    <h1>CS2 Match Tracker</h1>
 
-  <label>Eredmény:</label>
-  <select id="result">
-    <option value="win">Win</option>
-    <option value="lose">Lose</option>
-    <option value="draw">Draw</option>
-  </select>
+    <div class="inputBox">
 
-  <label>Killek:</label>
-  <input type="number" id="kills" placeholder="pl. 23">
+        <label for="resultSelect">Eredmény:</label>
+        <select id="resultSelect">
+            <option value="win">Win</option>
+            <option value="lose">Lose</option>
+            <option value="draw">Draw</option>
+        </select>
 
-  <label>Halálok:</label>
-  <input type="number" id="deaths" placeholder="pl. 14">
+        <label for="mapSelect">Map:</label>
+        <select id="mapSelect"></select>
 
-  <label>Assistek:</label>
-  <input type="number" id="assists" placeholder="pl. 5">
+        <label>Kills:</label>
+        <input type="number" id="killsInput">
 
-  <label>Időpont:</label>
-  <input type="text" id="match-time" placeholder="2026.08.12 03:13">
+        <label>Deaths:</label>
+        <input type="number" id="deathsInput">
 
-  <button id="save-match">Meccs mentése</button>
+        <label>Assists:</label>
+        <input type="number" id="assistsInput">
 
-  <h3>Rögzített meccsek</h3>
-  <ul id="match-list"></ul>
-</section>
+        <button id="saveBtn">Mentés</button>
+    </div>
 
-<!-- 🔥 EZ A SOR HIÁNYZOTT -->
-<script src="script.js"></script>
+    <h2>Mentett meccsek</h2>
+    <div id="matchList"></div>
 
+    <script src="script.js"></script>
 </body>
 </html>
